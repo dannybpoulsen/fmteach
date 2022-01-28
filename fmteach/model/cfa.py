@@ -1,14 +1,14 @@
 class Location:
-    def __init__ (self,instructions,name = None):
-        self._name = name or "??"
+    def __init__ (self,name = None):
+        self._name = name or "??"  
 
     def getName (self):
         return self._name
 
         
 class Edge:
-    def __init__ (self,from,to, instructions = None):
-        self._from = from
+    def __init__ (self,fromm,to, instructions = None):
+        self._from = fromm
         self._to = to
         self._instructions = instructions or []
         
@@ -18,6 +18,9 @@ class Edge:
     def getTo (self):
         return self._to
 
+    def instructions (self):
+        yield from self._instructions
+    
 class CFA:
     def __init__(self):
         self._edges = []
@@ -27,18 +30,26 @@ class CFA:
         
 
     def makeLocation (self,name = None):
-        self._locations.append (Location (name or f"loc{len(self._edges)}"))
-        self._edgesfrom[self._location[-1]] = []
-        self._edgesto[self._location[-1]] = []
-        return self._locations[-1]
+        loc  = Location (name or f"loc{len(self._locations)}")
+        self._locations.append (loc)
+        self._edgesfrom[loc] = []
+        self._edgesto[loc] = []
+        return loc
 
     def setInitialLocation (self,location):
         self._initiallocation = location
 
-    def makeEdge (self,from,to,instructions):
-        self._edges.append (from,to,instructions)
-        self._edgesfrom[from].append(self._edges[-1])
+    def getInitialLocation (self):
+        return self._initiallocation 
+    
+        
+    def makeEdge (self,fromm,to,instructions):
+        self._edges.append (Edge (fromm,to,instructions))
+        self._edgesfrom[fromm].append(self._edges[-1])
         self._edgesto[to].append(self._edges[-1])
         return self._edges[-1]
-    
+
+    def getEdgesFrom (self,loc):
+        for e in self._edgesfrom[loc]:
+            yield e
 

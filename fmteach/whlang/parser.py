@@ -11,14 +11,15 @@ class Parser:
         name = pp.Regex (r"[a-z]+").setParseAction (lambda  s,l,t: t[0])
         vardec = self.varDeclarationParser (name)
         expr = self.expressionParser (name)
-        stmt = vardec + self.stmtParser (name,expr)
-        self._parser = stmt 
+            
+        prgm = (vardec + self.stmtParser (name,expr)).setParseAction (lambda s,l,t: fmteach.whlang.nodes.Program (t[0],t[1],fmteach.whlang.nodes.Location (self._filename,pp.lineno(l,s),pp.col(l,s))) )
+        self._parser = prgm 
         
         
     def ParseString (self,inp):
         self._filename = "str"
         try:
-            return  self._parser.parseString (inp,parseAll = True)
+            return  self._parser.parseString (inp,parseAll = True)[0]
         except pp.ParseException as p:
             fmteach.ui.messages.error (str(p))
             return None
@@ -27,12 +28,15 @@ class Parser:
     def stmtParser (self,name,expr):
         seq = pp.Forward ()
         assign = (name + pp.Literal (":=") + expr).setParseAction (lambda s,l,t: fmteach.whlang.nodes.StmtAssign (t[0],t[2],fmteach.whlang.nodes.Location (self._filename,pp.lineno(l,s),pp.col(l,s))))
+        nondet = (name + pp.Literal (":=") + pp.Literal ("NonDet")).setParseAction (lambda s,l,t: fmteach.whlang.nodes.StmtNonDet (t[0],fmteach.whlang.nodes.Location (self._filename,pp.lineno(l,s),pp.col(l,s))))
+    
         iff = (pp.Literal ("If") + expr + seq +  pp.Literal ("Else") + seq).setParseAction (lambda s,l,t: fmteach.whlang.nodes.StmtIf (t[1],t[2],t[4],fmteach.whlang.nodes.Location (self._filename,pp.lineno(l,s),pp.col(l,s))))
         whilee = (pp.Literal ("While") + expr + seq).setParseAction (lambda s,l,t: fmteach.whlang.nodes.StmtWhile (t[1],t[2],fmteach.whlang.nodes.Location (self._filename,pp.lineno(l,s),pp.col(l,s))))        
-        skip = (pp.Literal ("Skip"))
-        stmt = (iff | whilee | assign | skip).setParseAction (lambda s,l,t: t[0])
+        skip = (pp.Literal ("Skip")).setParseAction (lambda s,l,t: fmteach.whlang.nodes.StmtSkip (fmteach.whlang.nodes.Location (self._filename,pp.lineno(l,s),pp.col(l,s))))
+        stmt = (iff | whilee | assign | nondet | skip).setParseAction (lambda s,l,t: t[0])
         seq << (pp.Literal ("{") +  pp.delimitedList (stmt, ";") + pp.Literal ("}")  )
-        return  seq.setParseAction (lambda s,l,t: t[0])
+        return  seq.setParseAction (lambda s,l,t: fmteach.whlang.nodes.StmtSequence(t[1:-1],
+                                                                                    fmteach.whlang.nodes.Location (self._filename,pp.lineno(l,s),pp.col(l,s))))
         
         
     def expressionParser (self,name):
@@ -84,7 +88,8 @@ class Parser:
 
         
         
-        factor = GEq | Gt | Lt | Eq | NEq | LEq | paran | i8 | i32 | addr | name
+        factor = GEq | Gt | Lt | Eq | NEq | LEq | paran | i8 | i32 | addr | name.setParseAction (lambda s,l,t: fmteach.whlang.nodes.ExprVariable (t[0],
+                                                                                                                   fmteach.whlang.nodes.Location (self._filename,pp.lineno(l,s),pp.col(l,s))))
 
         mul = (factor + pp.Literal ("*") + factor).setParseAction (lambda s,l,t: fmteach.whlang.nodes.ExprBinary (t[0],
                                                                                                                   t[1],
@@ -139,7 +144,8 @@ class Parser:
                                                                                                          ))
 
         
+
         
-        return pp.delimitedList((boolean  | int8 | int32 | pointer), delim=";").setParseAction  (lambda s,l,t:  t)
+        return pp.delimitedList((boolean  | int8 | int32 | pointer), delim=";").setParseAction (lambda s,l,t: [t])
     
 
