@@ -12,6 +12,7 @@ class InstructionCode(enum.Enum):
     GEq = 9
     Gt = 10
     #
+    
     NonDet = 11
     Assign = 12
     Assume = 13
@@ -24,6 +25,13 @@ class InstructionCode(enum.Enum):
     Skip = 19
     #
     Assert = 20
+    #
+    PredEq =  21
+    PredNEq = 22
+    PredLEq =  23
+    PredGEq = 24
+    PredLt =  25
+    PredGt = 26
     
 class Instruction:
     def __init__ (self,code = InstructionCode.Skip, operators = []):

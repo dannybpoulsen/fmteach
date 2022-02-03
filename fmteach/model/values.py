@@ -33,7 +33,7 @@ class IntegerConstant:
         self._type = type
 
     def getType (self):
-        return type
+        return self._type
 
     def __str__(self):
         return str(self._val)

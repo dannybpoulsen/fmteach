@@ -1,3 +1,8 @@
+from rich.console import Console
+from rich.markdown import Markdown
+
+
+
 class ExerciseDescriptor:
     def __init__ (self,name,readmefile,call,solcall):
         self._name = name
@@ -12,10 +17,17 @@ class ExerciseDescriptor:
         
         subp.set_defaults (func=self)
 
+    def showReadme (self):
+        console = Console()
+                
+        with open(self._readmefile,'r') as ff:
+            markdown = Markdown(ff.read())
+            console.print(markdown)
+            
+        
     def __call__ (self,args,model):
         if args.readme:
-            with open(self._readmefile,'r') as ff:
-                print (ff.read ())
+            self.showReadme ()
         elif args.solution:
             self._solcall (model)
     

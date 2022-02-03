@@ -26,6 +26,10 @@ class State:
     
     def __hash__ (self):
         return hash ((tuple(self._values),self._loc))
+
+    def __eq__ (self,oth):
+        return self._loc == oth._loc and self._values == oth._values
+    
     
     @staticmethod
     def buildInitialState (prgm):
@@ -40,13 +44,10 @@ class State:
             if fmteach.model.values.Types.Pointer == type:
                 values[f.getId ()] =  (numpy.int32 (0))
             if fmteach.model.values.Types.Bool == type:
-                values[f.getId ()] = (numpy.bool (False))
+                values[f.getId ()] = (numpy.int8 (False))
         return State(values,prgm.getCFA ().getInitialLocation ())
 
 
-class LookupValue:
-    def __init__(self,state):
-        self._state = state
 
 
 def executeInstructionSequence (nstate,instrs):
@@ -145,7 +146,11 @@ def run_sol (whlan):
                 if nstate not in visited:
                     waiting.append (nstate)
                     visited.add (nstate)
+    fmteach.ui.messages.message ("Done")
+    fmteach.ui.messages.message ("Displaying Graph")
+
+    
     dot.view ()    
         
     
-    fmteach.ui.messages.message ("Done")
+    
