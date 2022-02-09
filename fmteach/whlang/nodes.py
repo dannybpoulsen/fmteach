@@ -159,6 +159,18 @@ class StmtNonDet (Node):
     def getVariable (self):
         return self._var
 
+
+class StmtAssert (Node):
+    def __init__ (self,expr,loc):
+        super().__init__(loc)
+        self._expr = expr
+        
+    def visit (self,v):
+        v.visitStmtAssert (self)
+        
+    def getAssert (self):
+        return self._expr
+
     
 class StmtSequence (Node):
     def __init__(self,stmts,loc):

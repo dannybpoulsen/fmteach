@@ -1,0 +1,12 @@
+I8 a
+   {
+      a := NonDet ;
+      While ( a <= 9i8 ) {
+      	    a:= NonDet
+	    	};
+		a:=NonDet;
+      If (a>=10i8) {
+      	 While (1i8 <= a) {Skip }
+      }
+	Else { Skip}
+}

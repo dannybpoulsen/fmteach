@@ -1,5 +1,6 @@
 import io
 import fmteach.ui
+import fmteach.model.cfa
 import fmteach.model.values
 import fmteach.model.instructions
 
@@ -127,6 +128,8 @@ def run_sol (whlan):
     visited = set()
     waiting = [initial]
     visited.add(initial)
+
+    badloc = 0
     
     while len(waiting) > 0:
         
@@ -134,8 +137,11 @@ def run_sol (whlan):
         loc = state.getLoc ()
         for e in cfa.getEdgesFrom (loc):
             to = e.getTo ()
+            
             nstate = state.copy (to)
             if executeInstructionSequence (nstate,e.instructions ()):
+                if to.getAttr () == fmteach.model.cfa.LocationAttr.Avoid:
+                    badloc += 1
                 label = constructLabel (e)    
                 if nstate not in visited:
                     waiting.append (nstate)
@@ -143,8 +149,6 @@ def run_sol (whlan):
 
     
     fmteach.ui.messages.message ("Done")
-    fmteach.ui.messages.message (f"Program has {len(visited)}") 
-    fmteach.ui.messages.message ("Displaying Graph")
-        
+    fmteach.ui.messages.message (f"Program has {len(visited)} - bad states {badloc}") 
     
     

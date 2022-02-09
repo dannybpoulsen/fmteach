@@ -1,0 +1,12 @@
+I8 a
+   {
+      a := 9i8 ;
+      If ( a <= 9i8 ) {
+      Skip
+}
+
+      Else {
+      	   Skip
+      }     
+      
+}

@@ -82,6 +82,25 @@ class Compiler:
         self._program.getCFA ().makeEdge (startloc,endloc,instrs)
         self._start = startloc
         self._end = endloc
+
+    def visitStmtAssert (self,assertt):
+        cfa = self._program.getCFA ()
+        start = cfa.makeLocation ()
+        condcheck = cfa.makeLocation ()
+        end = cfa.makeLocation ()
+        assertbroken = cfa.makeLocation (name  = "Avoid", attr = fmteach.model.cfa.LocationAttr.Avoid)
+        
+        assertt.getAssert ().visit (self);            
+        condition = self._expr
+        
+        cfa.makeEdge (start,condcheck,self._instrs)
+        
+        
+        cfa.makeEdge (condcheck,end,[fmteach.model.instructions.Instruction (fmteach.model.instructions.InstructionCode.Assume,[condition])])
+        cfa.makeEdge (condcheck,assertbroken,[fmteach.model.instructions.Instruction (fmteach.model.instructions.InstructionCode.NegAssume,[condition])])
+
+        self._start = start
+        self._end = end
         
     def visitStmtNonDet (self,nondet):
         startloc = self._program.getCFA().makeLocation ()

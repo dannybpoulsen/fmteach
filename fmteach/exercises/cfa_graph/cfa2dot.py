@@ -7,7 +7,7 @@ def run (whlan):
     compiler = fmteach.whlang.compiler.Compiler ()
     model  = compiler.BuildProgram (whlan)
 
-    #dot = graphviz.Digraph('CFA') 
+    dot = graphviz.Digraph('CFA') 
     
     
     fmteach.ui.messages.message ("Initiating CFA2DOT")
@@ -16,5 +16,5 @@ def run (whlan):
     
     fmteach.ui.messages.message ("Done")
 
-    #dot.view ()    
+    dot.view ()    
     

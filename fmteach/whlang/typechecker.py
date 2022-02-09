@@ -29,7 +29,7 @@ class Typechecker:
     
     def visitExprVariable (self,variable):
         if variable.getName () not in self._variables:
-            fmteach.messages.error (f"On {vd.getLocation ()} --- {vd.getName ()} not defined")
+            fmteach.ui.messages.error (f"On {vd.getLocation ()} --- {vd.getName ()} not defined")
             self._ok = False
         else:
             variable.setType (self._variables.get(variable.getName (),None))
@@ -63,7 +63,15 @@ class Typechecker:
     
     def visitStmtNonDet (self,nondet):
         nondet.getVariable ().visit (self);            
-    
+
+    def visitStmtAssert (self,assertt):
+        assertt.getAssert ().visit (self);            
+        if assertt.getAssert ().getType () != fmteach.model.values.Types.Bool:
+            fmteach.ui.messages.error (f"Must be bool")
+            self._ok = False
+            
+        
+        
     def visitStmtSequence (self,sequence):
         for s in sequence.getStatements ():
             s.visit (self)
@@ -76,7 +84,7 @@ class Typechecker:
         if iff.getCondition ().getType () != fmteach.model.values.Types.Bool:
             fmteach.ui.messages.error (f"Must be bool")
             self._ok = False
-        
+            
         
 
     def visitStmtWhile (self,whilee):

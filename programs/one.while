@@ -1,0 +1,7 @@
+I8 a;
+I8 b
+
+{
+a := NonDet;
+b := NonDet
+}
