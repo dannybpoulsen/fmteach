@@ -92,12 +92,12 @@ class Parser:
                                                                                                                    fmteach.whlang.nodes.Location (self._filename,pp.lineno(l,s),pp.col(l,s))))
 
         mul = (factor + pp.Literal ("*") + factor).setParseAction (lambda s,l,t: fmteach.whlang.nodes.ExprBinary (t[0],
-                                                                                                                  t[1],
+                                                                                                                  t[2],
                                                                                                                    fmteach.whlang.nodes.BinOp.Mul,
                                                                                                                    fmteach.whlang.nodes.Location (self._filename,pp.lineno(l,s),pp.col(l,s))))
 
         div = (factor + pp.Literal ("/") + factor).setParseAction (lambda s,l,t: fmteach.whlang.nodes.ExprBinary (t[0],
-                                                                                                                   t[1],
+                                                                                                                   t[2],
                                                                                                                    fmteach.whlang.nodes.BinOp.Div,
                                                                                                                     fmteach.whlang.nodes.Location (self._filename,pp.lineno(l,s),pp.col(l,s))))
         
@@ -106,12 +106,12 @@ class Parser:
         
         
         add = (term  + pp.Literal ("+") + term).setParseAction (lambda s,l,t: fmteach.whlang.nodes.ExprBinary (t[0],
-                                                                                                                   t[1],
+                                                                                                                   t[2],
                                                                                                                    fmteach.whlang.nodes.BinOp.Add,
                                                                                                                    fmteach.whlang.nodes.Location (self._filename,pp.lineno(l,s),pp.col(l,s))))
 
         sub = (term + pp.Literal ("-") + term).setParseAction (lambda s,l,t: fmteach.whlang.nodes.ExprBinary (t[0],
-                                                                                                                   t[1],
+                                                                                                                   t[2],
                                                                                                                    fmteach.whlang.nodes.BinOp.Sub,
                                                                                                                     fmteach.whlang.nodes.Location (self._filename,pp.lineno(l,s),pp.col(l,s))))
         

@@ -18,10 +18,10 @@ class Descriptor:
 
     def valueOperations (self):
         return self._operations 
-
+    
     def valueCoverMerge (self):
         return self._covermerge 
-
+    
     def initialPath (self):
         return None
     

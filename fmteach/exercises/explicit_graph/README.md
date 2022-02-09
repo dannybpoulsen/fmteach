@@ -1,6 +1,8 @@
+
+
 # Explicit State Space Graph  
 
-In this exercise we will gradually create a graphical view of the
+In this exercise we will  create a graphical view of the
 explicit state graph of our program. Like in the previus exercise a
 template for your solution is available in
 __fmteach/exercises/cfa2dot.py__.  
@@ -16,13 +18,9 @@ For solving this exercise you will need to
   variable assignments in a list and use a variables id  to access the
   value of thaat variable in a given state. 
   
-- Create a function that takes a state and a list of instructions as
+- Create a function (transfer) that takes a state and a list of instructions as
   parameters. It should update the state according to that sequence of
   instructions. 
   
 - Have a method for copying states, and a method for checking whether
   two states are equivalent. 
-
-
-Beware that the explicit graph  for most programs is too large to
-display  with the graphviz viewer 

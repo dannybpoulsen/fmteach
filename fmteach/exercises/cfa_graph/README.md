@@ -9,6 +9,6 @@ in the variable __model__.
 - For showing the graph it is recommended to use the graphviz library
 - You should use a worklist algorithm for iterating over all locations
   of the program
-  - Python conveninently has list and set construction data structures
+  - Python  has list and set construction data structures
 	that you can use for representing the __waiting__ and __passed__
 	list of the worklist algorithm

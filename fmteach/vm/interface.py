@@ -56,24 +56,6 @@ class State:
         else:
             return PathStatus.Unknown
 
-    def LEq (self,l1,l2):
-        pass
-
-    def GEq (self,l1,l2):
-        pass
-
-    def Gt (self,l1,l2):
-        pass
-
-    def Lt (self,l1,l2):
-        pass
-
-    def Eq (self,l1,l2):
-        pass
-
-    def NEq (self,l1,l2):
-        pass
-
         
     @staticmethod
     def buildInitialState (prgm,domain):
