@@ -1,18 +1,23 @@
 # FMTeach   
-This is a repository of exercises for the Formal Methods part of the Security course given on Aalborg University in the Spring of 2022. 
-
-
-
-
-All exercises are accessed by, from the root, running
+This is a repository of exercises for the Formal Methods part of the Security course given on Aalborg University in the Spring of 2022. All  of the exercises requires students to add some specific files in the repository. Running
 
 ```
-PYTHONPATH=./ python bin/fmteach programs/programname.while EXERCISENAME
+PYTHONPATH=./ python bin/fmteach programs/programname.while EXERCISENAME 
 ```
 
-where `EXERCISENAME` may be one of the following:  
+without having solved the exercise will display which files has to be modified. A description is available by running 
+```
+PYTHONPATH=./ python bin/fmteach programs/programname.while EXERCISENAME --readme 
+```
+
+
+
+
+
+#Exercises   
+
 |-------------------|------------------------------------------------------------|--------------------|
-| Exercisename      | Information                                                | Ready              |
+| Exercisename      | Information                                                | Ready  for solving |
 |-------------------|------------------------------------------------------------|--------------------|
 | CFAGraph          | [Information](fmteach/exercises/cfa_graph/README.md)       | :heavy_check_mark: |
 | ExplicitGraph     | [Information](fmteach/exercises/explicit_graph/README.md)  | :heavy_check_mark: |
@@ -20,6 +25,7 @@ where `EXERCISENAME` may be one of the following:
 | GenericVM         | [Information](fmteach/exercises/generic_vm/README.md)      | :x:                |
 | StateGenerator    | [Information](fmteach/exercises/state_generator/README.md) | :x:                |
 |-------------------|------------------------------------------------------------|--------------------|
+
 
 
 # Requirements  
@@ -34,3 +40,14 @@ rich==11.2.0
 
 
 The requirements can conveniently be installed with `pip install -r requirements.txt`.
+
+
+# Solutions  
+Solutions to all exercises are available in the repository. Generally files students need to modify are mirrored by an `sol.py`/`_sol.py` file which contains the solution. The solutions can be run with 
+
+```
+PYTHONPATH=./ python bin/fmteach programs/programname.while EXERCISENAME --solution
+```
+
+
+
