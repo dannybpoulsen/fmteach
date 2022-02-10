@@ -1,0 +1,40 @@
+Prmg ::= VarDeclList Seq
+
+name ::= [a-z]+
+typedec ::= 'Bool' | 'I8' | 'I32' | 'Addr'
+
+VarDec ::= typedef <name>
+VarDecList ::= _ | <VarDec> (';' <VarDec> )*;
+
+Stmt ::= <name> ':=' <expr> |
+         'If' <expr> <Seq> 'Else' <Seq> |
+	 'While' <expr> <Seq> |
+	 'Skip' |
+	 'Assert' <expr> |
+	 <name> ':=' 'NonDet'
+
+literal ::= [0-9]+i8 |
+	    [0-9]+i32 |
+	    [0-9]+a
+
+ArithOp ::= '+' |
+      	 '-' |
+	 ' /' |
+         '*   ' 
+
+BoolOp ::= '<=' |
+       	   '>=' |
+       	   '==' |
+       	   '!=' |
+       	   '>' |
+       	   '<' |
+
+Comparison ::= '(' <expr> BoolOp <expr> ')'
+expr ::= literal |
+         '(' <expr> ')' |
+	 <expr> ArithOp <expr> |
+	 <Comparison> 
+	 
+
+Seq ::= '{' <stmt> (';' <stmt> )* '}'
+		   
