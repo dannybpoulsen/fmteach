@@ -19,7 +19,7 @@ class PassedWaiting:
         
     def mergeState (self,p,state):
         if p.getLoc () != state.getLoc ():
-            # Not the same state...thus the state cannot be merged
+            # Not the same location...thus the state cannot be merged
             return None
         else:
             #Try to merge the states values

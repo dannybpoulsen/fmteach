@@ -1,10 +1,21 @@
+import enum
+
+class LocationAttr(enum.Enum):
+    Normal = 1
+    Avoid = 2
+
 class Location:
-    def __init__ (self,name = None):
-        self._name = name or "??"  
+    def __init__ (self,name = None,attr = None):
+        self._name = name or "??"
+        self._attr = attr or LocationAttr.Normal
 
     def getName (self):
         return self._name
-
+    
+    def getAttr (self):
+        return self._attr
+    
+    
         
 class Edge:
     def __init__ (self,fromm,to, instructions = None):
@@ -29,8 +40,8 @@ class CFA:
         self._edgesto = {}
         
 
-    def makeLocation (self,name = None):
-        loc  = Location (name or f"loc{len(self._locations)}")
+    def makeLocation (self,name = None,attr=None):
+        loc  = Location (name or f"loc{len(self._locations)}",attr)
         self._locations.append (loc)
         self._edgesfrom[loc] = []
         self._edgesto[loc] = []

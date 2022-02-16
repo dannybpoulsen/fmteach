@@ -1,0 +1,11 @@
+I8 a;
+I8 b
+   {
+   a := 0i8;
+   b := NonDet ;
+   While (8i8 >= 4i8) {
+   	 Assert (b != 0i8);
+   	 a := a  / b
+  }
+   
+}

@@ -67,34 +67,7 @@ class VM:
                 if res == PathStatus.NSatis:
                     return False
 
-
-
-            elif op == fmteach.model.instructions.InstructionCode.PredLt:
-                l,r = i.getOp (0),lookup(i.getOp(1)),lookup(i.getOp(2))
-                nstate.Lt(self._operations.Lt (l,r))
-            
-            elif op == fmteach.model.instructions.InstructionCode.PredGt:
-                l,r = i.getOp (0),lookup(i.getOp(1)),lookup(i.getOp(2))
-                nstate.Gt(self._operations.Gt (l,r))
-            
-            elif op == fmteach.model.instructions.InstructionCode.PredLEq:
-                l,r = i.getOp (0),lookup(i.getOp(1)),lookup(i.getOp(2))
-                nstate.LEq(self._operations.LEq (l,r))
-            
-            elif op == fmteach.model.instructions.InstructionCode.PredGEq:
-                l,r = i.getOp (0),lookup(i.getOp(1)),lookup(i.getOp(2))
-                nstate.GEq(self._operations.GEq (l,r))
-
-            elif op == fmteach.model.instructions.InstructionCode.PredEq:
-                l,r = i.getOp (0),lookup(i.getOp(1)),lookup(i.getOp(2))
-                nstate.Eq(self._operations.LEq (l,r))
-            
-            elif op == fmteach.model.instructions.InstructionCode.PredNEq:
-                l,r = i.getOp (0),lookup(i.getOp(1)),lookup(i.getOp(2))
-                nstate.NEq(self._operations.GEq (l,r))
-            
-        
-        
+                
         return True
     
 
