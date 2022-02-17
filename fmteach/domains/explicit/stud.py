@@ -10,6 +10,8 @@ class ConstantCreator:
 
     def makeNonDet (self,type):
         assert(False)
+
+
 class Operations:
     def Add (self,val1,val2):
         assert(False)

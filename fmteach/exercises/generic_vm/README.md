@@ -1,6 +1,6 @@
 # Generic VM  
 
-If we continue our exploration of formal methods we very quickly end
+If we continue our exploration of formal methods, we very quickly end
 up implementing somethings constantly:   
 - A worklist algorithm,  
 - a "VM" loop over all the instructions in our program.   

@@ -2,12 +2,12 @@
 This is a repository of exercises for the Formal Methods part of the Security course given on Aalborg University in the Spring of 2022. All  of the exercises requires students to add some specific files in the repository. Running
 
 ```
-PYTHONPATH=./ python bin/fmteach programs/programname.while EXERCISENAME 
+python fmteachbin programs/programname.while EXERCISENAME 
 ```
 
 without having solved the exercise will display which files has to be modified. A description is available by running 
 ```
-PYTHONPATH=./ python bin/fmteach programs/programname.while EXERCISENAME --readme 
+python fmteachbin programs/programname.while EXERCISENAME --readme 
 ```
 
 
@@ -46,7 +46,7 @@ The requirements can conveniently be installed with `pip install -r requirements
 Solutions to all exercises are available in the repository. Generally files students need to modify are mirrored by an `sol.py`/`_sol.py` file which contains the solution. The solutions can be run with 
 
 ```
-PYTHONPATH=./ python bin/fmteach programs/programname.while EXERCISENAME --solution
+python fmteachbin programs/programname.while EXERCISENAME --solution
 ```
 
 
